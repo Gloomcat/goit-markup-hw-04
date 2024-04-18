@@ -13,13 +13,22 @@
   --standard-line-height: 1.5;
 
   --primary-color: #2e2f42;
+  --primary-modal-color: #2e2f4266;
   --secondary-color: #434455;
+
   --specific-border-color: #e7e9fc;
+
   --primary-background-color: #ffffff;
   --secondary-background-color: #f4f4fd;
+  --modal-background-color: #fcfcfc;
+
   --primary-control-color: #4d5ae5;
   --active-control-color: #404bbf;
+  --active-social-color: #31d0aa;
+  --black-color: #000000;
 
+  --primary-transition-duration: 250ms;
+  --primary-transition-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -81,7 +90,8 @@ img {
   gap: 76px;
 }
 
-.nav-list, .contacts-list {
+.nav-list,
+.contacts-list {
   display: flex;
   gap: 40px;
 }
@@ -92,8 +102,30 @@ img {
 
 .nav-list-item-link {
   display: block;
+  position: relative;
   font-weight: var(--medium-font-weight);
   padding: 24px 0;
+  transition: color var(--primary-transition-duration)
+    var(--primary-transition-function);
+}
+
+.nav-list-item-link::after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 100%;
+  opacity: 0;
+  bottom: 10px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--active-control-color);
+  transition: opacity var(--primary-transition-duration) var(--primary-transition-function);
+}
+
+.nav-list-item-link:hover::after,
+.nav-list-item-link:focus::after,
+.nav-list-item-link:active::after {
+  opacity: 100%;
 }
 
 .contacts-list-item-link {
@@ -101,6 +133,8 @@ img {
   color: var(--secondary-color);
   font-style: normal;
   padding: 24px 0;
+  transition: color var(--primary-transition-duration)
+    var(--primary-transition-function);
 }
 
 .contacts-list-item-link:hover,
@@ -112,6 +146,14 @@ img {
 }
 
 .hero {
+  background-image: linear-gradient(
+      rgba(46, 47, 66, 0.7),
+      rgba(46, 47, 66, 0.7)
+    ),
+    url(/images/hero/hero-bg.jpg);
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  color: var(--primary-background-color);
   padding: 188px 0;
 }
 
@@ -140,6 +182,10 @@ img {
   padding: 16px 32px;
   max-width: 169px;
   margin: auto;
+  transition: background-color var(--primary-transition-duration)
+      var(--primary-transition-function),
+    border-color var(--primary-transition-duration)
+      var(--primary-transition-function);
 }
 
 .hero-button:hover,
@@ -218,6 +264,12 @@ img {
   letter-spacing: var(--double-letter-spacing);
   text-align: center;
   padding: 12px 24px;
+  transition: color var(--primary-transition-duration)
+      var(--primary-transition-function),
+    background-color var(--primary-transition-duration)
+      var(--primary-transition-function),
+    border-color var(--primary-transition-duration)
+      var(--primary-transition-function);
 }
 
 .controls-list-item-button:hover,
@@ -265,14 +317,18 @@ img {
   padding: 32px 16px;
 }
 
-.hero,
 .page-footer {
   background-color: var(--primary-color);
   color: var(--primary-background-color);
+  padding: 100px 0;
 }
 
-.page-footer {
-  padding: 100px 0;
+.page-footer .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 120px;
 }
 
 .footer-logo {
@@ -301,4 +357,120 @@ img {
 
 .footer-text {
   max-width: 264px;
+}
+
+.footer-social-header {
+  font-weight: var(--medium-font-weight);
+  margin-bottom: 16px;
+}
+
+.footer-social-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-social-list-item {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-control-color);
+  border-radius: 50%;
+  transition: background-color var(--primary-transition-duration)
+    var(--primary-transition-function);
+}
+
+.footer-social-list-item:hover,
+.footer-social-list-item:focus,
+.footer-social-list-item:active {
+  background-color: var(--active-social-color);
+}
+
+.footer-social-list-item-link {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-social-list-item-icon {
+  fill: var(--secondary-background-color);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--primary-modal-color);
+  transition: opacity var(--primary-transition-duration)
+      var(--primary-transition-function),
+    visibility var(--primary-transition-duration)
+      var(--primary-transition-function);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  width: 408px;
+  min-height: 584px;
+  border-radius: 4px;
+  background-color: var(--modal-background-color);
+  box-shadow: 0px 2px 1px 0px rgba(var(--black-color), 13%),
+    0px 1px 3px 0px rgba(var(--black-color), 12%),
+    0px 1px 1px 0px rgba(var(--black-color), 14%);
+  transition: opacity var(--primary-transition-duration)
+      var(--primary-transition-function),
+    transform var(--primary-transition-duration)
+      var(--primary-transition-function);
+}
+
+.backdrop.is-hidden .modal {
+  transform: translateX(-50%) translateY(-50%) scale(0.3);
+  opacity: 0;
+}
+
+.modal-button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 24px;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 10%);
+  background-color: var(--specific-border-color);
+  transition: background-color var(--primary-transition-duration)
+      var(--primary-transition-function),
+    border-color var(--primary-transition-duration)
+      var(--primary-transition-function);
+}
+
+.modal-button:hover,
+.modal-button:focus,
+.modal-button:active {
+  border-color: var(--active-control-color);
+  background-color: var(--active-control-color);
+}
+
+.modal-button-icon {
+  fill: var(--primary-color);
+  transition: fill var(--primary-transition-duration)
+    var(--primary-transition-function);
+}
+
+.modal-button:hover .modal-button-icon,
+.modal-button:focus .modal-button-icon,
+.modal-button:active .modal-button-icon {
+  fill: var(--primary-background-color);
 }
