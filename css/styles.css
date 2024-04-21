@@ -136,7 +136,7 @@ img {
 .contacts-list-item-link:focus,
 .nav-list-item-link:hover,
 .nav-list-item-link:focus,
-.nav-list-item-link:active
+.nav-list-item-link:active,
 .nav-list-item-link.current {
   color: var(--active-control-color);
 }
