@@ -113,16 +113,14 @@ img {
   content: "";
   width: 100%;
   opacity: 0;
-  bottom: 10px;
+  bottom: 0;
   height: 4px;
   border-radius: 2px;
   background-color: var(--active-control-color);
   transition: opacity var(--primary-transition);
 }
 
-.nav-list-item-link:hover::after,
-.nav-list-item-link:focus::after,
-.nav-list-item-link:active::after {
+.nav-list-item-link.current::after {
   opacity: 100%;
 }
 
@@ -138,7 +136,8 @@ img {
 .contacts-list-item-link:focus,
 .nav-list-item-link:hover,
 .nav-list-item-link:focus,
-.nav-list-item-link:active {
+.nav-list-item-link:active
+.nav-list-item-link.current {
   color: var(--active-control-color);
 }
 
@@ -147,11 +146,13 @@ img {
       rgba(46, 47, 66, 0.7),
       rgba(46, 47, 66, 0.7)
     ),
-    url(/images/hero/hero-bg.jpg);
+    url(../images/hero/hero-bg.jpg);
   background-position: 50% 0;
   background-repeat: no-repeat;
   color: var(--primary-background-color);
   padding: 188px 0;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .hero-header {
@@ -182,6 +183,7 @@ img {
   transition: var(--primary-transition);
   transition-property: background-color border-color;
   box-shadow: 0px 4px 4px 0px #00000026;
+  cursor: pointer;
 }
 
 .hero-button:hover,
@@ -306,6 +308,7 @@ img {
   padding: 12px 24px;
   transition: var(--primary-transition);
   transition-property: color background-color border-color box-shadow;
+  cursor: pointer;
 }
 
 .controls-list-item-button:hover,
@@ -353,11 +356,13 @@ img {
 }
 
 .customers-list-item-link {
-  display: block;
+  display: flex;
   width: 168px;
+  height: 88px;
+  justify-content: center;
+  align-items: center;
   border: 1px solid var(--customers-color);
   border-radius: 4px;
-  padding: 16px 32px;
   transition: border-color var(--primary-transition);
 }
 
@@ -433,7 +438,6 @@ img {
   flex-direction: row;
   justify-content: left;
   align-items: flex-start;
-  gap: 120px;
 }
 
 .footer-logo {
@@ -462,6 +466,10 @@ img {
 
 .footer-text {
   max-width: 264px;
+}
+
+.footer-description {
+  margin-right: 120px;
 }
 
 .page-footer .social-header {
@@ -529,6 +537,7 @@ img {
   background-color: var(--specific-border-color);
   transition: var(--primary-transition);
   transition-property: background-color border-color;
+  cursor: pointer;
 }
 
 .modal-button:hover,
